@@ -1,44 +1,27 @@
 const express = require("express");
-const router = express();
+const app = express();
 const helmet = require("helmet"); 
 const morgan = require("morgan");   
+const accRoute = require("./routes/account");
+const payRoute = require("./routes/payment");
+const depRoute = require("./routes/deposit");
+const witRoute = require("./routes/withdraw");
+const aciRoute = require("./routes/accounting");
 
-router.use(express.json());
-router.use(helmet());
-router.use(morgan("common"));
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-router.get('/account', (req, res) => {
-  res.send('Hello Account!')
-});
+app.use("/account", accRoute);
+app.use("/payment", payRoute);
+app.use("/deposit", depRoute);
+app.use("/withdraw", witRoute);
+app.use("/accounting", aciRoute);
 
-router.get('/account/:id', (req, res) => {
-  res.send('Hello Account Info!')
-});
-
-router.get('/account/:id', (req, res) => {
-  res.send('Hello Payment!')
-});
-
-router.get('/payment', (req, res) => {
-  res.send('Hello Payment!')
-});
-
-router.get('/deposit', (req, res) => {
-  res.send('Hello Deposit!')
-});
-
-router.get('/withdraw', (req, res) => {
-  res.send('Hello Withdraw!')
-});
-
-router.get('/accounting/:id', (req, res) => {
-  res.send('Hello Transaction History!')
-});
-
-router.listen(5050, () => { 
+app.listen(5050, () => { 
   console.log("Backend Server is running on port 5050");
 }); 
