@@ -2,13 +2,6 @@ const mongoose = require("mongoose");
 
 const AccountSchema = new mongoose.Schema(
   {
-    ownerName: {
-      type: String,
-      require: true,
-      min: 3,
-      max: 20,
-      unique: true,
-    },
     accountNumber: {
       type: Number,
       required: true,
@@ -18,6 +11,13 @@ const AccountSchema = new mongoose.Schema(
     currencyCode: {
         type: String,
         enum: ["TRY", "USD", "EUR"],
+    },
+    ownerName: {
+      type: String,
+      require: true,
+      min: 3,
+      max: 20,
+      unique: true,
     },
     accountType: {
         type: String, 

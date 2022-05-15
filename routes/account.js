@@ -21,10 +21,19 @@ const Account = require("../models/Account");
     }catch(err){
       res.status(500).json(err);
     }
-  });
-  
-  router.get('/:id', (req, res) => {
-    res.send('Hello Account Info!')
   }); 
+  //Get Accounts
+  router.get('/:accountNumber', async (req, res) => {
+    try{
+      const account = await Account.findOne({accountNumber: req.params.accountNumber});
+      if(account){
+        const {_id,__v,updatedAt,createdAt, ...other} = account.toObject();
+        res.status(200).json(other);
+      }
+    }catch(err){
+      res.status(500).json(err);
+    }
+  }); 
+  
 
 module.exports = router;
