@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Account = require("../models/Account");
 
-  //Create Acoount
+  //Create Account
   router.post('/', async (req, res) => { 
     try{
       const newAccount = new Account({
